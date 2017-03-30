@@ -20,7 +20,7 @@ class Test{
 
       for(int i = 0; i < figury.length(); i++){
          figura = figury.charAt(i);
-         System.out.println(i+" "+figura);
+
          if(figura == 'o' || figura == 'p' || figura == 's'){
             ileLiczb++;
             if(ileLiczb > args.length - 1){
@@ -63,58 +63,67 @@ class Test{
          }
       }
 
-      for(int i = 0; i<figury.length(); i++){
+      /*for(int i = 0; i<figury.length(); i++){
          for(int j = 0; j < tab[i].length; j++){
             System.out.print(tab[i][j]+ " ");
          }
          System.out.println();
-      }
+      }*/
 
       for(int i = 0; i < figury.length(); i++){
          figura = figury.charAt(i);
          if(figura == 'o'){
-            try{
-            Kolo k = new Kolo(tab[i][0]);
-            tablica[i] = k;
+            if(tab[i][0] > 0){
+            Figura.K1 k = Figura.K1.Kolo;
+            k.a = tab[i][0];
+            System.out.println("Koło: Pole "+k.obliczPole()+" Obwód "+k.obliczObwod());
             }
-            catch(MojWyjatek1 e){
+            else{
                System.out.println("Złe dane dla figury!");
                continue;
             }
          }
          else if(figura == 'c'){
             if(tab[i][0] == tab[i][1] && tab[i][1] == tab[i][2] && tab[i][2] == tab[i][3] && tab[i][3] != 0 && tab[i][4] == 90){
-               try{
-               Kwadrat kw = new Kwadrat(tab[i][0]);
-               tablica[i] = kw;
+               if(tab[i][0] > 0){
+               Figura.K1 kw = Figura.K1.Kwadrat;
+               kw.a = tab[i][0];
+               System.out.println("Kwadrat: Pole "+kw.obliczPole()+" Obwód "+kw.obliczObwod());
                }
-               catch(MojWyjatek1 e){
+               else{
                   System.out.println("Złe dane dla figury!");
                   continue;
                }
             }
             else if(tab[i][0] == tab[i][1] && tab[i][1] == tab[i][2] && tab[i][2] == tab[i][3] && tab[i][3] != 0 && tab[i][4] != 90){
-               try{
-               Romb romb = new Romb(tab[i][0], tab[i][4]);
-               tablica[i] = romb;
+               if(tab[i][0] > 0 && tab[i][4] > 0 && tab[i][4] < 180){
+               Figura.K2 romb = Figura.K2.Romb;
+               romb.a = tab[i][0];
+               romb.kat = tab[i][4];
+               System.out.println("Romb: Pole "+romb.obliczPole()+" Obwód "+romb.obliczObwod());
                }
-               catch(MojWyjatek1 e){
+               else{
                   System.out.println("Złe dane dla figury!");
                   continue;
                }
             }
             else if(tab[i][0] == tab[i][1] && tab[i][2] == tab[i][3] && tab[i][4] == 90 || tab[i][0] == tab[i][2] && tab[i][1] == tab[i][3] && tab[i][4] == 90 || tab[i][0] == tab[i][3] && tab[i][1] == tab[i][2] && tab[i][4] == 90){
-               Prostokat prost;
-               try{
+               Figura.K2 prost;
+               if(tab[i][0] > 0 && tab[i][1] > 0 && tab[i][2] > 0 && tab[i][3] > 0){
                if(tab[i][0] == tab[i][1]){
-                  prost = new Prostokat(tab[i][0], tab[i][2]);
+                  prost = Figura.K2.Prostokat;
+                  prost.a = tab[i][0];
+                  prost.b = tab[i][2];
+                  System.out.println("Prostokat: Pole "+prost.obliczPole()+" Obwód "+prost.obliczObwod());
                }
                else{
-                  prost = new Prostokat(tab[i][0], tab[i][1]);
+                  prost = Figura.K2.Prostokat;
+                  prost.a = tab[i][0];
+                  prost.b = tab[i][1];
+                  System.out.println("Prostokat: Pole "+prost.obliczPole()+" Obwód "+prost.obliczObwod());
                }
-               tablica[i] = prost;
                }
-               catch(MojWyjatek1 e){
+               else{
                   System.out.println("Złe dane dla figury!");
                   continue;
                }
@@ -124,21 +133,23 @@ class Test{
             }
          }
          else if(figura == 'p'){
-            try{
-            Pieciokat p = new Pieciokat(tab[i][0]);
-            tablica[i] = p;
+            if(tab[i][0] > 0){
+               Figura.K1 p = Figura.K1.Pieciokat;
+               p.a = tab[i][0];
+               System.out.println("Pieciokat: Pole "+p.obliczPole()+" Obwód "+p.obliczObwod());
             }
-            catch(MojWyjatek1 e){
+            else{
                System.out.println("Złe dane dla figury!");
                continue;
             }
          }
          else if(figura == 's'){
-            try{
-            Szesciokat sz = new Szesciokat(tab[i][0]);
-            tablica[i] = sz;
+            if(tab[i][0] > 0){
+               Figura.K1 sz = Figura.K1.Szesciokat;
+               sz.a = tab[i][0];
+               System.out.println("Kwadrat: Pole "+sz.obliczPole()+" Obwód "+sz.obliczObwod());
             }
-            catch(MojWyjatek1 e){
+            else{
                System.out.println("Złe dane dla figury!");
                continue;
             }
@@ -148,10 +159,10 @@ class Test{
          }
       }
 
-      for(int i=0; i<tablica.length; i++){
+      /*for(int i=0; i<tablica.length; i++){
             System.out.println(tablica[i].getClass());
             System.out.println("Pole " + tablica[i].obliczPole());
             System.out.println("Obwod " + tablica[i].obliczObwod());
-      }
+      }*/
    }
 }
